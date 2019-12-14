@@ -9,12 +9,13 @@ card = []
         var desc = document.getElementById('d'+i).value;
         var img = document.getElementById('i'+i).value;
         var priority = document.getElementById('p'+i).value;
-        // var uid = document.getElementById('uid'+i).value;
+        var cid = document.getElementById('cid'+i).value;
         card.push({
           title : title,
           desc : desc,
           img : img,
           priority : priority,
+          cid : cid
           
     })
     card.sort(function(a,b){
@@ -56,6 +57,13 @@ function  add(){
     <input type="number" class="form-control" id="p${n}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
     </div>
 
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Card ID</span>
+    </div>
+    <input type="text" class="form-control" id="cid${n}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+  </div>
+
 </div>
 
   `
@@ -65,6 +73,8 @@ function  add(){
       document.getElementById(`d${i}`).value = v.desc;
       document.getElementById(`i${i}`).value = v.img;
       document.getElementById(`p${i}`).value = v.priority;
+      document.getElementById(`cid${i}`).value = v.cid;    
+
 
     })
 
@@ -73,11 +83,11 @@ function  add(){
 
 
 function display(){
-  
+  alert("Please confirm You have submitted!")
   card = JSON.parse(localStorage.getItem("card") || "[]");
   console.log(card)   
     str =''
-    card.map(c=>{
+    card.map((c,j)=>{
         str += `
         <h1 class="my-4" >${c.title}
     </h1>
@@ -90,6 +100,8 @@ function display(){
       <div class="col-md-5">
         <h3>${c.title}</h3>
         <p>${c.desc}</p>
+        <button type="button" class="btn btn-primary" onclick="showid('${c.cid}','${j}');">Read More</button>
+        <div id="cardid${j}"></div>
       </div>
     </div>
     <hr>
@@ -99,16 +111,6 @@ function display(){
     })
 }
 
-
-// function get(){
-//   var data = document.getElementById('show');
-//   console.log(data);
-//   alert(typeof(data))
-//   document.getElementById('card_detail').innerHTML = JSON.stringify(data);
-//   // document.getElementById('card_detail').innerHTML = string(data);
-// }
-
-
-// function showid(userid){
-//   document.getElementById('user_id').innerHTML = "User ID:" + userid;
-// }
+function showid(cid,j){
+  document.getElementById(`cardid${j}`).innerHTML = "Card ID:" + cid;
+}
