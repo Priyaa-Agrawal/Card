@@ -90,7 +90,6 @@ function display(){
       <div class="col-md-5">
         <h3>${c.title}</h3>
         <p>${c.desc}</p>
-        <button type="button" class="btn btn-primary" onclick="showid(${c.uid})">Add More</button>
       </div>
     </div>
     <hr>
@@ -110,6 +109,6 @@ function display(){
 // }
 
 
-function showid(userid){
-  document.getElementById('user_id').innerHTML = "User ID:" + userid;
-}
+// function showid(userid){
+//   document.getElementById('user_id').innerHTML = "User ID:" + userid;
+// }
