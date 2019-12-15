@@ -9,7 +9,7 @@ card = []
         var title = document.getElementById('t'+i).value;
         var desc = document.getElementById('d'+i).value;
         console.log(desc)
-        desc = desc.replace(/\r?\n/g, '<br />');
+        desc = desc.replace(/\n/, '<br />');
         console.log(desc)
         var img = document.getElementById('i'+i).value;
         var priority = document.getElementById('p'+i).value;
