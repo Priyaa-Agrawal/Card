@@ -1,11 +1,9 @@
 card = []
 n = 0;
-m = 1;
 function take(){
   
 card = []
     for(i=0;i<=n;i++){
-      
         var title = document.getElementById('t'+i).value;
         var desc = document.getElementById('d'+i).value;
         desc = desc.replace(/\n/, '<br />');
@@ -20,9 +18,6 @@ card = []
           cid : cid
           
     })
-    card.sort(function(a,b){
-      return a.priority-b.priority
-    })
     //  console.log(card)
     localStorage.setItem("card", JSON.stringify(card));
 }  
@@ -32,6 +27,7 @@ function  add(){
      take()
      n++; 
     document.getElementById('new').innerHTML += ` <div id="delete${n}">
+    <h4>New Card</h4>
   <div class="input-group mb-3" >
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
@@ -67,7 +63,9 @@ function  add(){
     </div>
     <input type="text" class="form-control" id="cid${n}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
   </div>
+  <button type="button" class="btn btn-danger" onclick="remove('${n}')">Remove</button>
   </div>
+  <hr>
 </div>
 
 
@@ -87,10 +85,11 @@ function  add(){
 
 
 function display(){
-  alert("Please confirm You have submitted!")
-
+  // take();
   card = JSON.parse(localStorage.getItem("card") || "[]");
-   
+  card.sort(function(a,b){
+    return a.priority-b.priority
+  })
       str =''
       card.map((c,j)=>{
         if(c.title!=0){
@@ -119,8 +118,6 @@ function display(){
           alert('Title daal Lavre!! ')
         }
       })
- 
-    
 }
 
 function showid(cid,j){
@@ -128,11 +125,11 @@ function showid(cid,j){
 }
 
 
-function remove(){
-  if(n!=0 ){
-    var d = document.getElementById(`delete${n}`);
+function remove(i){
+  // if(n!=0 ){
+    var d = document.getElementById(`delete${i}`);
     d.remove();
     n--;
-  }
+  // }
   
 }
