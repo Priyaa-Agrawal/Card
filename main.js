@@ -1,5 +1,6 @@
 card = []
 n = 0;
+m = 1;
 function take(){
   
 card = []
@@ -7,6 +8,9 @@ card = []
       
         var title = document.getElementById('t'+i).value;
         var desc = document.getElementById('d'+i).value;
+        console.log(desc)
+        desc = desc.replace(/\r?\n/g, '<br />');
+        console.log(desc)
         var img = document.getElementById('i'+i).value;
         var priority = document.getElementById('p'+i).value;
         var cid = document.getElementById('cid'+i).value;
@@ -21,15 +25,16 @@ card = []
     card.sort(function(a,b){
       return a.priority-b.priority
     })
-     console.log(card)
+    //  console.log(card)
     localStorage.setItem("card", JSON.stringify(card));
 }  
 }
 
 function  add(){
-    take()
-    n++;   
-    document.getElementById('new').innerHTML += ` <div class="input-group mb-3">
+     take()
+     n++; 
+    document.getElementById('new').innerHTML += ` <div id="delete${n}">
+  <div class="input-group mb-3" >
     <div class="input-group-prepend">
       <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
     </div> 
@@ -37,11 +42,12 @@ function  add(){
   </div>
   
   <div class="input-group mb-3">
-    <div class="input-group-prepend">
-      <span class="input-group-text" id="inputGroup-sizing-default">Detail</span>
-    </div>
-    <input type="text" class="form-control" id="d${n}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-  </div>
+        <div class="input-group-prepend">
+          <span class="input-group-text">Detail</span>
+        </div>
+        <textarea class="form-control" id="d${n}" aria-label="With textarea"></textarea>
+      </div>
+
 
   <div class="input-group mb-3">
     <div class="input-group-prepend">
@@ -63,8 +69,9 @@ function  add(){
     </div>
     <input type="text" class="form-control" id="cid${n}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
   </div>
-
+  </div>
 </div>
+
 
   `
     
@@ -77,40 +84,57 @@ function  add(){
 
 
     })
-
 }
 
 
 
 function display(){
   alert("Please confirm You have submitted!")
-  card = JSON.parse(localStorage.getItem("card") || "[]");
-  console.log(card)   
-    str =''
-    card.map((c,j)=>{
-        str += `
-        <h1 class="my-4" >${c.title}
-    </h1>
-    <div class="row">
-      <div class="col-md-7">
-        <a href="#">
-          <img class="img-fluid rounded mb-3 mb-md-0" src="${c.img}" alt="${c.title}">
-        </a>
-      </div>
-      <div class="col-md-5">
-        <h3>${c.title}</h3>
-        <p>${c.desc}</p>
-        <button type="button" class="btn btn-primary" onclick="showid('${c.cid}','${j}');">Read More</button>
-        <div id="cardid${j}"></div>
-      </div>
-    </div>
-    <hr>
 
-        ` 
-        document.getElementById('show').innerHTML = str; 
-    })
+  card = JSON.parse(localStorage.getItem("card") || "[]");
+   
+      str =''
+      card.map((c,j)=>{
+        if(c.title!=0){
+          str += `
+          <h1 class="my-4" >${c.title}
+      </h1>
+      <div class="row">
+        <div class="col-md-7">
+          <a href="#">
+            <img class="img-fluid rounded mb-3 mb-md-0" src="${c.img}" alt="${c.title}">
+          </a>
+        </div>
+        <div class="col-md-5">
+          <h3>${c.title}</h3>
+          <p>${c.desc}</p>
+          <button type="button" class="btn btn-primary" onclick="showid('${c.cid}','${j}');">Read More</button>
+          <div id="cardid${j}"></div>
+        </div>
+      </div>
+      <hr>
+  
+          ` 
+          document.getElementById('show').innerHTML = str; 
+        }
+        else{
+          alert('Title daal Lavre!! ')
+        }
+      })
+ 
+    
 }
 
 function showid(cid,j){
   document.getElementById(`cardid${j}`).innerHTML = "Card ID:" + cid;
+}
+
+
+function remove(){
+  if(n!=0 ){
+    var d = document.getElementById(`delete${n}`);
+    d.remove();
+    n--;
+  }
+  
 }

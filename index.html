@@ -12,6 +12,7 @@
   </head>
   <body>
 <div id="new">
+  <div id="delete0">
     <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
@@ -19,11 +20,11 @@
         <input type="text" class="form-control" id="t0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
       
-      <div class="input-group mb-3">
+        <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="inputGroup-sizing-default">Detail</span>
+          <span class="input-group-text">Detail</span>
         </div>
-        <input type="text" class="form-control" id="d0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <textarea class="form-control" id="d0" aria-label="With textarea"></textarea>
       </div>
 
       <div class="input-group mb-3">
@@ -46,13 +47,16 @@
         </div>
         <input type="text" class="form-control" id="cid0" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
       </div>
-    
+    </div>
   </div>
 
       <button type="button" class="btn btn-primary" onclick="take()">Submit</button>
-      <button type="button" class="btn btn-warning" onclick="add()">Add More</button>  
+      <button type="button" class="btn btn-warning" onclick="add()">Add More</button>
+      <button type="button" class="btn btn-danger" onclick="remove()">Remove</button>
       <button type="button" class="btn btn-success" onclick="window.location.href='./result.html'">Preview</button>      
     
+ 
+
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="./main.js"></script>
