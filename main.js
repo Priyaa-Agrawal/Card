@@ -18,13 +18,11 @@ card = []
           cid : cid
           
     })
-    //  console.log(card)
     localStorage.setItem("card", JSON.stringify(card));
 }  
 }
 
 function  add(){
-     take()
      n++; 
     document.getElementById('new').innerHTML += ` <div id="delete${n}">
     <h4>New Card</h4>
@@ -63,12 +61,10 @@ function  add(){
     </div>
     <input type="text" class="form-control" id="cid${n}" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
   </div>
-  <button type="button" class="btn btn-danger" onclick="remove('${n}')">Remove</button>
+  <button type="button" class="btn btn-danger" id="b${n}" onclick="remove('${n}')">Remove</button>
   </div>
   <hr>
 </div>
-
-
   `
     
     card.map((v,i)=>{
@@ -77,9 +73,8 @@ function  add(){
       document.getElementById(`i${i}`).value = v.img;
       document.getElementById(`p${i}`).value = v.priority;
       document.getElementById(`cid${i}`).value = v.cid;    
-
-
     })
+    take();
 }
 
 
@@ -105,7 +100,7 @@ function display(){
         <div class="col-md-5">
           <h3>${c.title}</h3>
           <p>${c.desc}</p>
-          <button type="button" class="btn btn-primary" onclick="showid('${c.cid}','${j}');">Read More</button>
+          <button type="button" class="btn btn-primary"  onclick="showid('${c.cid}','${j}');">Read More</button>
           <div id="cardid${j}"></div>
         </div>
       </div>
@@ -126,10 +121,36 @@ function showid(cid,j){
 
 
 function remove(i){
-  // if(n!=0 ){
     var d = document.getElementById(`delete${i}`);
     d.remove();
-    n--;
-  // }
-  
+
+    if(i==n){
+      n--;
+    }
+    else{
+
+       j=Number(i)+1;
+       t=Number(n);
+       while(j<=t)
+        {
+          k=j-1;
+          document.getElementById(`delete${j}`).id = `delete${k}`;
+          document.getElementById(`t${j}`).id = `t${k}`;
+          document.getElementById(`d${j}`).id = `d${k}`;
+          document.getElementById(`i${j}`).id = `i${k}`;
+          document.getElementById(`p${j}`).id = `p${k}`;
+          document.getElementById(`cid${j}`).id = `cid${k}`; 
+          document.getElementById(`b${j}`).setAttribute('onclick',`remove('${k}')`);
+          document.getElementById(`b${j}`).id = `b${k}`; 
+          document.getElementById(`t${k}`).value = card[k].title;
+          document.getElementById(`d${k}`).value = card[k].desc;
+          document.getElementById(`i${k}`).value = card[k].img;
+          document.getElementById(`p${k}`).value = card[k].priority;
+          document.getElementById(`cid${k}`).value = card[k].cid;
+          n=k;   
+          j++;
+        }
+
+        }
+        take();
 }
