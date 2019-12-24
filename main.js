@@ -23,6 +23,7 @@ card = []
 }
 
 function  add(){
+    take();
      n++; 
     document.getElementById('new').innerHTML += ` <div id="delete${n}">
     <h4>New Card</h4>
@@ -80,7 +81,6 @@ function  add(){
 
 
 function display(){
-  // take();
   card = JSON.parse(localStorage.getItem("card") || "[]");
   card.sort(function(a,b){
     return a.priority-b.priority
@@ -121,6 +121,7 @@ function showid(cid,j){
 
 
 function remove(i){
+    take();
     var d = document.getElementById(`delete${i}`);
     d.remove();
 
@@ -142,11 +143,11 @@ function remove(i){
           document.getElementById(`cid${j}`).id = `cid${k}`; 
           document.getElementById(`b${j}`).setAttribute('onclick',`remove('${k}')`);
           document.getElementById(`b${j}`).id = `b${k}`; 
-          document.getElementById(`t${k}`).value = card[k].title;
-          document.getElementById(`d${k}`).value = card[k].desc;
-          document.getElementById(`i${k}`).value = card[k].img;
-          document.getElementById(`p${k}`).value = card[k].priority;
-          document.getElementById(`cid${k}`).value = card[k].cid;
+          document.getElementById(`t${k}`).value = card[j].title;
+          document.getElementById(`d${k}`).value = card[j].desc;
+          document.getElementById(`i${k}`).value = card[j].img;
+          document.getElementById(`p${k}`).value = card[j].priority;
+          document.getElementById(`cid${k}`).value = card[j].cid;
           n=k;   
           j++;
         }
